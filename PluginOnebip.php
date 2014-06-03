@@ -15,34 +15,34 @@ class PluginOnebip extends GatewayPlugin
               description - description of the variable, displayed in ClientExec
         */
         $variables = array (
-                   /*T*/"Plugin Name"/*/T*/ => array (
+                   lang("Plugin Name") => array (
                                         "type"          =>"hidden",
-                                        "description"   =>/*T*/"How CE sees this plugin (not to be confused with the Signup Name)"/*/T*/,
-                                        "value"         =>/*T*/"Onebip"/*/T*/
+                                        "description"   =>lang("How CE sees this plugin (not to be confused with the Signup Name)"),
+                                        "value"         =>lang("Onebip")
                                        ),
-                   /*T*/"User ID"/*/T*/ => array (
+                   lang("User ID") => array (
                                         "type"          =>"text",
-                                        "description"   =>/*T*/"The email address associated to your Onebip account."/*/T*/,
+                                        "description"   =>lang("The email address associated to your Onebip account."),
                                         "value"         =>""
                                        ),
-                   /*T*/'API Key'/*/T*/ => array (
+                   lang('API Key') => array (
                                         'type'          =>'password',
-                                        'description'   =>/*T*/'Please enter your API Key for your Onebip here. The API Key can be set under the "My Account" section of your Onebip account.'/*/T*/,
+                                        'description'   =>lang('Please enter your API Key for your Onebip here. The API Key can be set under the "My Account" section of your Onebip account.'),
                                         'value'         =>''
                                        ),
-                   /*T*/"Onebip Payment Fee"/*/T*/ => array (
+                   lang("Onebip Payment Fee") => array (
                                         "type"          =>"text",
-                                        "description"   =>/*T*/"A percentage to increase the amount to charge, due to the high Onebip payment fees. For example, a value of 20 (20%) will charge an amount of $120 for an invoice of $100"/*/T*/,
+                                        "description"   =>lang("A percentage to increase the amount to charge, due to the high Onebip payment fees. For example, a value of 20 (20%) will charge an amount of $120 for an invoice of $100"),
                                         "value"         =>"0"
                                        ),
-                   /*T*/"Signup Name"/*/T*/ => array (
+                   lang("Signup Name") => array (
                                         "type"          =>"text",
-                                        "description"   =>/*T*/"Select the name to display in the signup process for this payment type. Example: eCheck or Credit Card."/*/T*/,
+                                        "description"   =>lang("Select the name to display in the signup process for this payment type. Example: eCheck or Credit Card."),
                                         "value"         =>"Onebip"
                                        ),
-                   /*T*/"Invoice After Signup"/*/T*/ => array (
+                   lang("Invoice After Signup") => array (
                                         "type"          =>"yesno",
-                                        "description"   =>/*T*/"Select YES if you want an invoice sent to the customer after signup is complete."/*/T*/,
+                                        "description"   =>lang("Select YES if you want an invoice sent to the customer after signup is complete."),
                                         "value"         =>"1"
                                        )
         );
