@@ -50,35 +50,36 @@ class PluginOnebip extends GatewayPlugin
     }
 
     function credit($params)
-    {}
+    {
+    }
 
     function singlepayment($params)
     {
-        $stat_url = mb_substr($params['clientExecURL'],-1,1) == "//" ? $params['clientExecURL']."plugins/gateways/onebip/callback.php" : $params['clientExecURL']."/plugins/gateways/onebip/callback.php";
+        $stat_url = mb_substr($params['clientExecURL'], -1, 1) == "//" ? $params['clientExecURL']."plugins/gateways/onebip/callback.php" : $params['clientExecURL']."/plugins/gateways/onebip/callback.php";
 
         //Need to check to see if user is coming from signup
         if ($params['isSignup']==1) {
             $returnURL=$params["clientExecURL"]."/order.php?step=5&pass=1";
             $returnURL_Cancel=$params["clientExecURL"]."/order.php?step=5&pass=0";
-        }else {
+        } else {
             $returnURL=$params["clientExecURL"];
             $returnURL_Cancel=$params["clientExecURL"];
         }
 
         $currency = new Currency($this->user);
-        $amount = $currency->format($params['currencytype'], $params['invoiceTotal'] , false);
+        $amount = $currency->format($params['currencytype'], $params['invoiceTotal'], false);
 
         // Adding Onebip Payment Fee to the amount to pay
         $params["plugin_onebip_Onebip Payment Fee"] = trim($params["plugin_onebip_Onebip Payment Fee"]);
-        if(!is_numeric($params["plugin_onebip_Onebip Payment Fee"])){
+        if (!is_numeric($params["plugin_onebip_Onebip Payment Fee"])) {
             $params["plugin_onebip_Onebip Payment Fee"] = 0;
         }
         $OnebipPaymentFeeDescription = '';
-        if($params["plugin_onebip_Onebip Payment Fee"] > 0){
+        if ($params["plugin_onebip_Onebip Payment Fee"] > 0) {
             $amountWithFees = $amount * (100 + $params["plugin_onebip_Onebip Payment Fee"]) / 100;
             $amountCents = sprintf("%01.2f", round($amountWithFees, 2)) * 100;
             $OnebipPaymentFeeDescription = " + Onebip Payment Fee (".$params["plugin_onebip_Onebip Payment Fee"]."%)";
-        }else{
+        } else {
             $amountCents = sprintf("%01.2f", round($amount, 2)) * 100;
         }
 
@@ -86,7 +87,7 @@ class PluginOnebip extends GatewayPlugin
         $item_code_company_part = $params["companyName"];
         $item_code_invoice_part = " Invoice ".$params['invoiceNumber'].$OnebipPaymentFeeDescription;
         $max_company_part_size = 64 - strlen($item_code_invoice_part);
-        if(strlen($item_code_company_part) > $max_company_part_size){
+        if (strlen($item_code_company_part) > $max_company_part_size) {
             $item_code_company_part = substr($item_code_company_part, 0, $max_company_part_size - 3)."...";
         }
         $item_code = $item_code_company_part.$item_code_invoice_part;
@@ -138,4 +139,3 @@ class PluginOnebip extends GatewayPlugin
         exit;
     }
 }
-?>
