@@ -7,6 +7,11 @@ class PluginOnebipCallback extends PluginCallback
 {
     function processCallback()
     {
+        // Execute PluginCallback::processCallback() first
+        if (!parent::processCallback()) {
+            return;
+        }
+
         if (!isset($GLOBALS['testing'])) {
             $testing = false;
         } else {
